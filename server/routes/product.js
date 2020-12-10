@@ -1,8 +1,7 @@
-const { json } = require("body-parser");
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const Product = require("../models/Product");
+const { Product } = require("../models/Product");
 
 //=================================
 //             Product
@@ -23,6 +22,8 @@ router.post("/image", (req, res) => {
   //가져온 이미지 저장
   upload(req, res, (err) => {
     if (err) return res.json({ success: false, err });
+    console.log("+++++++++++++res : +++++++++++++++++++", res);
+    // console.log("req :", res.req);
     return res.json({
       success: true,
       filePath: res.req.file.path,
@@ -38,6 +39,15 @@ router.post("/", (req, res) => {
     if (err) return res.status(400).json({ success: false, err });
     return res.status(200).json({ success: true });
   });
+});
+
+router.post("/products", (req, res) => {
+  Product.find()
+    .populate("writer")
+    .exec((err, productInfo) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({ success: true, productInfo });
+    });
 });
 
 module.exports = router;

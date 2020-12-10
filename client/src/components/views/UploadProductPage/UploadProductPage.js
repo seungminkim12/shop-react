@@ -48,14 +48,13 @@ function UploadProductPage(props) {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
     if (!title || !description || !price || !images || !continent) {
       return alert("모든 값을 입력해 주세요!");
     }
 
     //서버에 채운 값을 request로 보냄
     const body = {
-      writer: props.user.user.email,
+      writer: props.user.userData._id,
       title,
       description,
       price,
@@ -64,6 +63,7 @@ function UploadProductPage(props) {
     };
 
     Axios.post("/api/product", body).then((res) => {
+      console.log("upload In");
       if (res.data.success) {
         alert("업로드 성공");
         props.history.push("/");
@@ -112,7 +112,7 @@ function UploadProductPage(props) {
         </select>
         <br />
         <br />
-        <Button type="submit">확인</Button>
+        <button type="submit">확인</button>
       </Form>
     </div>
   );
