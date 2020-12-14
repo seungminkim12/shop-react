@@ -63,7 +63,6 @@ function UploadProductPage(props) {
     };
 
     Axios.post("/api/product", body).then((res) => {
-      console.log("upload In");
       if (res.data.success) {
         alert("업로드 성공");
         props.history.push("/");
