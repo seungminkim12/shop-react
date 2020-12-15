@@ -55,7 +55,6 @@ function LandingPage() {
   };
 
   const renderCards = Products.map((product, index) => {
-    console.log("product", product);
     return (
       <Col key={index} lg={6} md={8} xs={24}>
         <Card cover={<ImageSlider images={product.images} />}>
@@ -102,7 +101,7 @@ function LandingPage() {
           {/*RadioBox */}
           <RadioBox
             list={price}
-            handleFilters={(filters) => handleFilters(filters, "continent")}
+            handleFilters={(filters) => handleFilters(filters, "price")}
           />
         </Col>
       </Row>
