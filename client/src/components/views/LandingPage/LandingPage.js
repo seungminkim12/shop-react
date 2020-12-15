@@ -13,7 +13,7 @@ function LandingPage() {
   const [Limit, setLimit] = useState(4);
   const [PostSize, setPostSize] = useState(0);
   const [Filters, setFilters] = useState({
-    continents: [],
+    continent: [],
     price: [],
   });
 
@@ -64,19 +64,43 @@ function LandingPage() {
     );
   });
 
-  const handleFilters = (filters, category) => {
-    const newFilters = { ...Filters };
-
-    newFilters[category] = filters;
-    console.log(newFilters[category]);
+  const showFilteredResult = (filters) => {
     let body = {
       skip: 0,
       limit: Limit,
-      newFilters,
+      newFilters: filters,
     };
 
     getProducts(body);
     setSkip(0);
+  };
+
+  const handlePrice = (value) => {
+    const data = price;
+    let array = [];
+
+    for (let key in data) {
+      if (data[key]._id === value) {
+        array = data[key].array;
+      }
+    }
+    return array;
+  };
+
+  const handleFilters = (filters, category) => {
+    const newFilters = { ...Filters };
+
+    newFilters[category] = filters;
+
+    console.log("newFilters", newFilters);
+
+    if (category === "price") {
+      let priceValue = handlePrice(filters);
+      newFilters[category] = priceValue;
+    }
+
+    showFilteredResult(newFilters);
+    setFilters(newFilters);
   };
 
   return (

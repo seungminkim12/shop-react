@@ -48,7 +48,16 @@ router.post("/products", (req, res) => {
 
   for (let key in req.body.newFilters) {
     if (req.body.newFilters[key].length > 0) {
-      findArgs[key] = req.body.newFilters[key];
+      if (req.body.newFilters[key] === "price") {
+        findArgs[key] = {
+          //greater than equal
+          $gte: req.body.newFilters[key][0],
+          //less than equal
+          $lte: req.body.newFilters[key][1],
+        };
+      } else {
+        findArgs[key] = req.body.newFilters[key];
+      }
     }
   }
 
