@@ -6,7 +6,7 @@ function DetailProductPage(props) {
 
   useEffect(() => {
     axios
-      .get(`/api/product/products_by_id=${productId}&type=single`)
+      .get(`/api/product/products_by_id?id=${productId}&type=single`)
       .then((res) => {
         if (res.data.success) {
           console.log(res.data);
