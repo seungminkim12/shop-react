@@ -44,11 +44,12 @@ router.post("/", (req, res) => {
 router.post("/products", (req, res) => {
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
+  let term = req.body.SearchTerm;
   let findArgs = {};
 
   for (let key in req.body.newFilters) {
     if (req.body.newFilters[key].length > 0) {
-      if (req.body.newFilters[key] === "price") {
+      if (key === "price") {
         findArgs[key] = {
           //greater than equal
           $gte: req.body.newFilters[key][0],
@@ -61,17 +62,46 @@ router.post("/products", (req, res) => {
     }
   }
 
-  console.log(findArgs);
+  console.log("finArgs:", findArgs);
 
-  Product.find(findArgs)
+  if (term) {
+    Product.find(findArgs)
+      .find({ $text: { $search: term } })
+      .populate("writer")
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productInfo) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res
+          .status(200)
+          .json({ success: true, productInfo, postSize: productInfo.length });
+      });
+  } else {
+    Product.find(findArgs)
+      .populate("writer")
+      .skip(skip)
+      .limit(limit)
+      .exec((err, productInfo) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res
+          .status(200)
+          .json({ success: true, productInfo, postSize: productInfo.length });
+      });
+  }
+});
+
+router.get("/products_by_id", (req, res) => {
+  // /api/product/products_by_id=${productId}&type=single
+  let type = req.query.type;
+  let productId = req.query.id;
+  console.log("Find In");
+
+  //productId 를 이용해서 DB에서 정보가져옴
+  Product.find({ _id: productId })
     .populate("writer")
-    .skip(skip)
-    .limit(limit)
-    .exec((err, productInfo) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res
-        .status(200)
-        .json({ success: true, productInfo, postSize: productInfo.length });
+    .exec((err, product) => {
+      if (err) return res.status(400).send(err);
+      return res.status(200).send({ success: true, product });
     });
 });
 
