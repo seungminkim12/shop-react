@@ -25,6 +25,7 @@ function LandingPage() {
       limit: Limit,
     };
 
+    console.log("useEffect Test");
     getProducts(body);
   }, []);
 

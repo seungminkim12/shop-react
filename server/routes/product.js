@@ -94,7 +94,6 @@ router.get("/products_by_id", (req, res) => {
   // /api/product/products_by_id=${productId}&type=single
   let type = req.query.type;
   let productId = req.query.id;
-  console.log("Find In");
 
   //productId 를 이용해서 DB에서 정보가져옴
   Product.find({ _id: productId })
