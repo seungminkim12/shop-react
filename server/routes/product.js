@@ -93,14 +93,24 @@ router.post("/products", (req, res) => {
 router.get("/products_by_id", (req, res) => {
   // /api/product/products_by_id=${productId}&type=single
   let type = req.query.type;
-  let productId = req.query.id;
+  let productIds = req.query.id;
+  console.log("Products_by_id INN");
+
+  if (type === "array") {
+    let ids = req.query.id.split(",");
+    console.log("==================ids==========", ids);
+    productIds = ids.map((item) => {
+      return item;
+    });
+    console.log("==================productIds", productIds);
+  }
 
   //productId 를 이용해서 DB에서 정보가져옴
-  Product.find({ _id: productId })
+  Product.find({ _id: { $in: productIds } })
     .populate("writer")
     .exec((err, product) => {
       if (err) return res.status(400).send(err);
-      return res.status(200).send({ success: true, product });
+      return res.status(200).json({ success: true, product });
     });
 });
 
