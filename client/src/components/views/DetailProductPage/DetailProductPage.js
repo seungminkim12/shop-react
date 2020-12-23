@@ -13,13 +13,11 @@ function DetailProductPage(props) {
     axios
       .get(`/api/product/products_by_id?id=${productId}&type=single`)
       .then((res) => {
-        if (res.data.success) {
-          setProduct(res.data.product[0]);
-        } else {
-          alert("상품 상세정보보기 실패");
-        }
-      }, []);
-  });
+        setProduct(res.data[0]);
+      })
+      .catch((err) => alert(err));
+  }, []);
+
   return (
     <div style={{ width: "100%", padding: "3rem 4rem" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
