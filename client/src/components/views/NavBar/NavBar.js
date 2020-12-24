@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
-import LeftMenu from './Sections/LeftMenu';
-import RightMenu from './Sections/RightMenu';
-import { Drawer, Button, Icon } from 'antd';
-import './Sections/Navbar.css';
+import React, { useState } from "react";
+import LeftMenu from "./Sections/LeftMenu";
+import RightMenu from "./Sections/RightMenu";
+import { Drawer, Button, Icon } from "antd";
+import "./Sections/Navbar.css";
 
 function NavBar() {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
+  const [CartCount, setCartCount] = useState(0);
 
   const showDrawer = () => {
-    setVisible(true)
+    setVisible(true);
   };
 
   const onClose = () => {
-    setVisible(false)
+    setVisible(false);
+  };
+
+  let drawCartCount = (count) => {
+    setCartCount(count);
   };
 
   return (
-    <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
+    <nav
+      className="menu"
+      style={{ position: "fixed", zIndex: 5, width: "100%" }}
+    >
       <div className="menu__logo">
         <a href="/">Logo</a>
       </div>
@@ -25,7 +33,11 @@ function NavBar() {
           <LeftMenu mode="horizontal" />
         </div>
         <div className="menu_rigth">
-          <RightMenu mode="horizontal" />
+          <RightMenu
+            mode="horizontal"
+            showCartCount={drawCartCount}
+            cart={CartCount}
+          />
         </div>
         <Button
           className="menu__mobile-button"
@@ -47,7 +59,7 @@ function NavBar() {
         </Drawer>
       </div>
     </nav>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

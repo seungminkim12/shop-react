@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, Icon, Badge } from "antd";
 import axios from "axios";
 import { USER_SERVER } from "../../../Config";
@@ -8,6 +8,15 @@ import { useSelector } from "react-redux";
 
 function RightMenu(props) {
   const user = useSelector((state) => state.user);
+  console.log(props);
+
+  useEffect(() => {
+    if (user.userData && user.userData.cart && user.userData.cart.length > 0) {
+      props.showCartCount(user.userData.cart.length);
+    } else {
+      props.showCartCount(0);
+    }
+  }, [user]);
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then((response) => {
@@ -37,7 +46,7 @@ function RightMenu(props) {
           <a href="/product/upload">Upload</a>
         </Menu.Item>
         <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
-          <Badge count={5}>
+          <Badge count={props.cart}>
             <a href="/user/cart" style={{ marginRight: -22, color: "#66777" }}>
               <Icon
                 type="shopping-cart"
