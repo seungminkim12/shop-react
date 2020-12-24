@@ -97,7 +97,8 @@ router.post("/addToCart", auth, (req, res) => {
         { new: true },
         (err, userInfo) => {
           if (err) return res.status(400).json({ success: false, err });
-          return res.status(200).json({ success: true, cart: userInfo.cart });
+          console.log(userInfo.cart);
+          return res.status(200).json(userInfo.cart);
         }
       );
     }
@@ -113,7 +114,7 @@ router.post("/addToCart", auth, (req, res) => {
         { new: true },
         (err, userInfo) => {
           if (err) return res.status(400).json({ success: false, err });
-          return res.status(200).json({ success: true, cart: userInfo.cart });
+          return res.status(200).json(userInfo.cart);
         }
       );
     }
