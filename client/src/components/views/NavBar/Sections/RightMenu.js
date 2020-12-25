@@ -10,13 +10,13 @@ function RightMenu(props) {
   const user = useSelector((state) => state.user);
   console.log(props);
 
-  useEffect(() => {
-    if (user.userData && user.userData.cart && user.userData.cart.length > 0) {
-      props.showCartCount(user.userData.cart.length);
-    } else {
-      props.showCartCount(0);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user.userData && user.userData.cart && user.userData.cart.length > 0) {
+  //     props.showCartCount(user.userData.cart.length);
+  //   } else {
+  //     props.showCartCount(0);
+  //   }
+  // }, [user]);
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then((response) => {
@@ -42,11 +42,14 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="history">
+          <a href="/history">History</a>
+        </Menu.Item>
         <Menu.Item key="upload">
           <a href="/product/upload">Upload</a>
         </Menu.Item>
         <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
-          <Badge count={props.cart}>
+          <Badge count={user.userData && user.userData.cart.length}>
             <a href="/user/cart" style={{ marginRight: -22, color: "#66777" }}>
               <Icon
                 type="shopping-cart"
