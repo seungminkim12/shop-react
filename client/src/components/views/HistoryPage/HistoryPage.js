@@ -22,7 +22,7 @@ function HistoryPage(props) {
                 <td>{item.id}</td>
                 <td>{item.price}</td>
                 <td>{item.quantity}</td>
-                <td>{item.dateOfPurchase}</td>
+                <td>{item.dateOfPurchase}</td
               </tr>
             ))}
         </tbody>
