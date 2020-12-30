@@ -30,7 +30,7 @@ function LandingPage() {
   }, []);
 
   const getProducts = (body) => {
-    axios.post("/api/product/products", body).then((res) => {
+    axios.post("5000:/api/product/products", body).then((res) => {
       if (res.data.success) {
         if (body.loadMore) {
           setProducts([...Products, ...res.data.productInfo]);
