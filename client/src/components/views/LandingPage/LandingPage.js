@@ -30,20 +30,18 @@ function LandingPage() {
   }, []);
 
   const getProducts = (body) => {
-    axios
-      .post("http://localhost:5000/api/product/products", body)
-      .then((res) => {
-        if (res.data.success) {
-          if (body.loadMore) {
-            setProducts([...Products, ...res.data.productInfo]);
-          } else {
-            setProducts(res.data.productInfo);
-          }
-          setPostSize(res.data.postSize);
+    axios.post("http://3.34.14.99/product/products", body).then((res) => {
+      if (res.data.success) {
+        if (body.loadMore) {
+          setProducts([...Products, ...res.data.productInfo]);
         } else {
-          alert("상품 로딩 실패");
+          setProducts(res.data.productInfo);
         }
-      });
+        setPostSize(res.data.postSize);
+      } else {
+        alert("상품 로딩 실패");
+      }
+    });
   };
 
   const loadMoreHandler = () => {

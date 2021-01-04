@@ -19,7 +19,19 @@ const connect = mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
+app.use("/api/users", require("./routes/users"));
+app.use("/api/product", require("./routes/product"));
 app.use(cors());
+
+// app.get("/api/users", (req, res, next) => {
+//   res.json({ msg: "user Cors Done" });
+// });
+// app.get("/api/product", (req, res, next) => {
+//   res.json({ msg: "product Cors Done" });
+// });
+// app.get("/products/:id", function (req, res, next) {
+//   res.json({ msg: "This is CORS-enabled for all origins!" });
+// });
 
 //to not get any deprecation warning or error
 //support parsing of application/x-www-form-urlencoded post data
@@ -28,9 +40,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // support parsing of application/json type post data
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-app.use("/api/users", require("./routes/users"));
-app.use("/api/product", require("./routes/product"));
 
 //use this to show the image you have in node js server to client (react js)
 //https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client

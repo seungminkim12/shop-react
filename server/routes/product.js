@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const router = express.Router();
 const multer = require("multer");
 const { Product } = require("../models/Product");
@@ -18,7 +19,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage }).single("file");
 
-router.post("/image", (req, res) => {
+router.post("/image", cors(), (req, res) => {
   //가져온 이미지 저장
   upload(req, res, (err) => {
     if (err) return res.json({ success: false, err });
@@ -31,7 +32,7 @@ router.post("/image", (req, res) => {
   });
 });
 
-router.post("/", (req, res) => {
+router.post("/", cors(), (req, res) => {
   //Save DB
   const product = new Product(req.body);
   console.log("==================product======================== : ", product);
@@ -41,7 +42,7 @@ router.post("/", (req, res) => {
   });
 });
 
-router.post("/products", (req, res) => {
+router.post("/products", cors(), (req, res) => {
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let term = req.body.SearchTerm;
@@ -90,7 +91,7 @@ router.post("/products", (req, res) => {
   }
 });
 
-router.get("/products_by_id", (req, res) => {
+router.get("/products_by_id", cors(), (req, res) => {
   // /api/product/products_by_id=${productId}&type=single
   let type = req.query.type;
   let productIds = req.query.id;
