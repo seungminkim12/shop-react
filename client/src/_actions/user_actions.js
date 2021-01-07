@@ -9,11 +9,11 @@ import {
   REMOVE_CART_ITEM,
   ON_SUCCESS_BUY,
 } from "./types";
-import { USER_SERVER } from "../components/Config.js";
+// import { USER_SERVER } from "../components/Config.js";
 
 export function registerUser(dataToSubmit) {
   const request = axios
-    .post(`${USER_SERVER}/register`, dataToSubmit)
+    .post(`/api/users/register`, dataToSubmit)
     .then((response) => response.data);
 
   return {
@@ -24,7 +24,7 @@ export function registerUser(dataToSubmit) {
 
 export function loginUser(dataToSubmit) {
   const request = axios
-    .post(`${USER_SERVER}/login`, dataToSubmit)
+    .post(`/api/users/login`, dataToSubmit)
     .then((response) => response.data);
 
   return {
@@ -35,7 +35,7 @@ export function loginUser(dataToSubmit) {
 
 export function auth() {
   const request = axios
-    .get(`${USER_SERVER}/auth`)
+    .get(`/api/users/auth`)
     .then((response) => response.data);
 
   return {
@@ -46,7 +46,7 @@ export function auth() {
 
 export function logoutUser() {
   const request = axios
-    .get(`${USER_SERVER}/add`)
+    .get(`/api/users/api/users/add`)
     .then((response) => response.data);
 
   return {
@@ -61,7 +61,7 @@ export function addToCart(id) {
   };
 
   const request = axios
-    .post(`${USER_SERVER}/addToCart`, body)
+    .post(`/api/users/addToCart`, body)
     .then((response) => response.data);
 
   return {

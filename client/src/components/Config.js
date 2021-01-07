@@ -1,4 +1,4 @@
-export const USER_SERVER = "http://54.180.90.171/api/users"; //localhost
+// export const USER_SERVER = "http://54.180.90.171"; //localhost
 
 //////////////////////////// For Header Configs //////////////////////////////////
 const config = {
