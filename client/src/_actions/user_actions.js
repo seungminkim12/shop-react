@@ -45,9 +45,7 @@ export function auth() {
 }
 
 export function logoutUser() {
-  const request = axios
-    .get(`/api/users/api/users/add`)
-    .then((response) => response.data);
+  const request = axios.get(`/api/users/add`).then((response) => response.data);
 
   return {
     type: LOGOUT_USER,
