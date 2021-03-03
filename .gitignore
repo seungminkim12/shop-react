@@ -1,7 +1,11 @@
 /node_modules
 /build
 
+createBucket.js
+uploadFile.js 
+
 dev.js
+
 
 
 
