@@ -12,6 +12,7 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     trim: true,
+    //띄어쓰기 없애줌
     unique: 1,
   },
   password: {
