@@ -32,7 +32,6 @@ function UploadProductPage(props) {
     } else if (target.name === "price") {
       setPrice(target.value);
     } else if (target.name === "continents") {
-      console.log(target.value);
       setContinent(target.value);
     }
   };

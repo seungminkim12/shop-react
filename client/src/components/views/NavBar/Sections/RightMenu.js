@@ -28,6 +28,7 @@ function RightMenu(props) {
     });
   };
 
+  //로그인 안됐을때
   if (user.userData && !user.userData.isAuth) {
     return (
       <Menu mode={props.mode}>

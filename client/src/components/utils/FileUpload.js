@@ -17,9 +17,10 @@ function FileUpload(props) {
       if (res.data.success) {
         //
         setImages([...images, res.data.filePath]);
-        images.map((image) => console.log(`../server/${image}`));
+        // images.map((image) => console.log(`../server/${image}`));
         props.refreshFunction([...images, res.data.filePath]);
       } else {
+        console.log(res.data.err);
         alert("파일 업로드 실패");
       }
     });
@@ -68,7 +69,7 @@ function FileUpload(props) {
               <div onClick={() => deleteHandler(image)} key={index}>
                 <img
                   style={{ minWidth: "300px", width: "300px", height: "240px" }}
-                  src={`../../../server/${image}`}
+                  src={`http://minsshop.cf/${image}`}
                 />
               </div>
             </>
