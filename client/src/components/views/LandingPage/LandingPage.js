@@ -33,7 +33,7 @@ function LandingPage() {
     axios.post("/api/product/products", body).then((res) => {
       if (res.data.success) {
         if (body.loadMore) {
-          setProducts([...Products, ...res.data.productInfo]);
+          setProducts([...Products, res.data.productInfo]);
         } else {
           setProducts(res.data.productInfo);
         }

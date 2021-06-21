@@ -53,6 +53,7 @@ function UploadProductPage(props) {
 
     //서버에 채운 값을 request로 보냄
     const body = {
+      //auth middleware 의 자식컴포넌트 이므로 auth에서 내려준 props인 user사용
       writer: props.user.userData._id,
       title,
       description,
@@ -64,6 +65,7 @@ function UploadProductPage(props) {
     Axios.post("/api/product", body).then((res) => {
       if (res.data.success) {
         alert("업로드 성공");
+        console.log(props);
         props.history.push("/");
       } else {
         alert("업로드 실패");
@@ -110,7 +112,7 @@ function UploadProductPage(props) {
         </select>
         <br />
         <br />
-        <button type="submit">확인</button>
+        <Button type="submit">확인</Button>
       </Form>
     </div>
   );

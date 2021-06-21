@@ -37,6 +37,7 @@ router.post("/image", (req, res) => {
 
 router.post("/", (req, res) => {
   //Save DB
+  //new로 새로운 product객체 생성
   const product = new Product(req.body);
   console.log("==================product======================== : ", product);
   product.save((err) => {

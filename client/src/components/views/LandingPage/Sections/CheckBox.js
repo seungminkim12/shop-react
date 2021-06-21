@@ -7,13 +7,16 @@ function CheckBox(props) {
   const [Checked, setChecked] = useState([]);
 
   const handleToggle = (value) => {
+    //checked 의 value 가져옴
     const currentIndex = Checked.indexOf(value);
 
     const newChecked = [...Checked];
 
+    //없으면 넣는다
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
+      //checked된 state에서 현재 누른 checked가 있다면 빼고
       newChecked.splice(currentIndex, 1);
     }
     setChecked(newChecked);
