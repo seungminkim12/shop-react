@@ -48,7 +48,7 @@ router.post("/", (req, res) => {
 
 router.post("/products", (req, res) => {
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
-  let limit = req.body.limit ? parseInt(req.body.limit) : 20;
+  let limit = req.body.limit ? parseInt(req.body.limit) : 4;
   let term = req.body.SearchTerm;
   let findArgs = {};
 

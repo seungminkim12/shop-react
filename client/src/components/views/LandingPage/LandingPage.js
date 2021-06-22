@@ -9,6 +9,7 @@ import RadioBox from "./Sections/RadioBox";
 import SearchFeature from "./Sections/SearchFeature";
 
 function LandingPage() {
+  //states
   const [Products, setProducts] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(4);
@@ -19,21 +20,23 @@ function LandingPage() {
   });
   const [SearchTerm, setSearchTerm] = useState("");
 
+  //functions
   useEffect(() => {
     let body = {
       skip: Skip,
       limit: Limit,
     };
 
-    console.log("useEffect Test");
     getProducts(body);
   }, []);
 
+  //load products
   const getProducts = (body) => {
     axios.post("/api/product/products", body).then((res) => {
       if (res.data.success) {
         if (body.loadMore) {
-          setProducts([...Products, res.data.productInfo]);
+          console.log("res.productInfo : ", res.data.productInfo);
+          setProducts([...Products, ...res.data.productInfo]);
         } else {
           setProducts(res.data.productInfo);
         }
@@ -44,22 +47,10 @@ function LandingPage() {
     });
   };
 
-  const loadMoreHandler = () => {
-    let skip = Skip + Limit;
-
-    let body = {
-      skip,
-      limit: Limit,
-      loadMore: true,
-    };
-
-    getProducts(body);
-    setSkip(skip);
-  };
-
+  //슬라이드 그리기
   const renderCards = Products.map((product, index) => {
     return (
-      <Col key={index} lg={6} md={8} xs={24}>
+      <Col key={index} lg={6} md={8} xs={24} style={{ marginTop: "15px" }}>
         <Card
           cover={
             <a href={`/product/${product._id}`}>
@@ -73,17 +64,21 @@ function LandingPage() {
     );
   });
 
-  const showFilteredResult = (filters) => {
+  //더보기
+  const loadMoreHandler = () => {
+    let skip = Skip + Limit;
+
     let body = {
-      skip: 0,
+      skip,
       limit: Limit,
-      newFilters: filters,
+      loadMore: true,
     };
 
     getProducts(body);
-    setSkip(0);
+    setSkip(skip);
   };
 
+  //가격 setting
   const handlePrice = (value) => {
     const data = price;
     let array = [];
@@ -96,6 +91,19 @@ function LandingPage() {
     return array;
   };
 
+  //필터 공통 작업
+  const showFilteredResult = (filters) => {
+    let body = {
+      skip: 0,
+      limit: Limit,
+      newFilters: filters,
+    };
+
+    getProducts(body);
+    setSkip(0);
+  };
+
+  //필터 판별
   const handleFilters = (filters, category) => {
     const newFilters = { ...Filters };
 
@@ -112,6 +120,7 @@ function LandingPage() {
     setFilters(newFilters);
   };
 
+  //검색
   const updateSearchTerm = (newSearchTerm) => {
     let body = {
       skip: 0,
@@ -128,9 +137,7 @@ function LandingPage() {
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
-        <h2>
-          Let's Travel Anywhere <Icon type="rocket" />
-        </h2>
+        <h2>Travel</h2>
       </div>
 
       {/*Filter */}
@@ -167,7 +174,13 @@ function LandingPage() {
       <Row gutter={(16, 16)}>{renderCards}</Row>
 
       {PostSize >= Limit && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        >
           <button onClick={loadMoreHandler}>더보기</button>
         </div>
       )}
