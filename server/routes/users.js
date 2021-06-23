@@ -80,6 +80,7 @@ router.get("/logout", auth, (req, res) => {
 
 router.post("/addToCart", auth, (req, res) => {
   //User collection에  모든 정보 가져오기
+  //미들웨어 auth 때문에 req.user <- 사용 가능
   User.findOne({ _id: req.user._id }, (err, userInfo) => {
     //가져온 정보에서 카트에 넣으려하는 상품이 이미 있는지 확인
     let duplicate = false;
@@ -91,9 +92,10 @@ router.post("/addToCart", auth, (req, res) => {
     //상품이 이미 있을때
     if (duplicate) {
       User.findOneAndUpdate(
+        //미들웨어 auth 때문에 req.user <- 사용 가능
         { _id: req.user._id, "cart.id": req.body.productId },
         { $inc: { "cart.$.quantity": 1 } },
-        //Front에 보내주려고 new: true
+        //update된 userInfo 를 넘겨주기 위해 new: true (commit 느낌)
         { new: true },
         (err, userInfo) => {
           if (err) return res.status(400).json({ success: false, err });

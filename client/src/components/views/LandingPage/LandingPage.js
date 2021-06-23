@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Icon, Col, Card, Row, Checkbox } from "antd";
+import { Icon, Col, Card, Row, Checkbox, Button } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
 import CheckBox from "./Sections/CheckBox";
@@ -181,7 +182,10 @@ function LandingPage() {
             marginTop: "20px",
           }}
         >
-          <button onClick={loadMoreHandler}>더보기</button>
+          <Button onClick={loadMoreHandler}>
+            <Icon type="plus" />
+            더보기
+          </Button>
         </div>
       )}
     </div>
