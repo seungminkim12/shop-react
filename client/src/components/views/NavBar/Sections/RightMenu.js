@@ -42,24 +42,31 @@ function RightMenu(props) {
     );
   } else {
     return (
-      <Menu mode={props.mode}>
-        <Menu.Item key="upload">
-          <a href="/product/upload">Upload</a>
-        </Menu.Item>
-        <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
-          <Badge count={props.cart}>
-            <a href="/user/cart" style={{ marginRight: -22, color: "#66777" }}>
-              <Icon
-                type="shopping-cart"
-                style={{ fontSize: 30, marginBottom: 3 }}
-              />
-            </a>
-          </Badge>
-        </Menu.Item>
-        <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
-        </Menu.Item>
-      </Menu>
+      <>
+        <Menu mode={props.mode}>
+          {user.userData && user.userData.isAdmin && (
+            <Menu.Item key="upload">
+              <a href="/product/upload">Upload</a>
+            </Menu.Item>
+          )}
+          <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
+            <Badge count={props.cart}>
+              <a
+                href="/user/cart"
+                style={{ marginRight: -22, color: "#66777" }}
+              >
+                <Icon
+                  type="shopping-cart"
+                  style={{ fontSize: 30, marginBottom: 3 }}
+                />
+              </a>
+            </Badge>
+          </Menu.Item>
+          <Menu.Item key="logout">
+            <a onClick={logoutHandler}>Logout</a>
+          </Menu.Item>
+        </Menu>
+      </>
     );
   }
 }
