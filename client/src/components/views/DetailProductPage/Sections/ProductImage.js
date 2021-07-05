@@ -8,8 +8,8 @@ function ProductImage(props) {
       let images = [];
       props.detail.images.map((item) => {
         images.push({
-          original: `http://localhost:5000/${item}`,
-          thumbnail: `http://localhost:5000/${item}`,
+          original: `http://minsshop.cf/${item}`,
+          thumbnail: `http://minsshop.cf/${item}`,
         });
         setImages(images);
       });

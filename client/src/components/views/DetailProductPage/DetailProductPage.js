@@ -13,7 +13,9 @@ function DetailProductPage(props) {
     axios
       .get(`/api/product/products_by_id?id=${productId}&type=single`)
       .then((res) => {
-        setProduct(res.data[0]);
+        console.log("this.props", props);
+        console.log(res.data);
+        setProduct(res.data);
       })
       .catch((err) => alert(err));
   }, []);
@@ -24,6 +26,7 @@ function DetailProductPage(props) {
         <h1>{Product.title}</h1>
       </div>
 
+      {/* 반응형을 한 Row Col */}
       <Row gutter={[16, 16]}>
         <Col lg={12} xs={24}>
           <ProductImage detail={Product} />
