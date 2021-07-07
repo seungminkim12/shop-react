@@ -9,7 +9,7 @@ import { continent, price } from "./Sections/Datas";
 import RadioBox from "./Sections/RadioBox";
 import SearchFeature from "./Sections/SearchFeature";
 
-function LandingPage() {
+function LandingPage(props) {
   //states
   const [Products, setProducts] = useState([]);
   const [Skip, setSkip] = useState(0);
@@ -28,6 +28,7 @@ function LandingPage() {
       limit: Limit,
     };
 
+    console.log(`Landing Page ${props}`);
     getProducts(body);
   }, []);
 

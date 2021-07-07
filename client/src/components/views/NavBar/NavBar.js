@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
 import { Drawer, Button, Icon } from "antd";
 import "./Sections/Navbar.css";
+import { useSelector } from "react-redux";
 
-function NavBar() {
+function NavBar(props) {
+  const user = useSelector((state) => state.user);
+
   const [visible, setVisible] = useState(false);
   const [CartCount, setCartCount] = useState(0);
 
@@ -47,7 +50,7 @@ function NavBar() {
           <Icon type="align-right" />
         </Button>
         <Drawer
-          title="Basic Drawer"
+          title={user.userData ? user.userData.name : ""}
           placement="right"
           className="menu_drawer"
           closable={false}
@@ -55,7 +58,11 @@ function NavBar() {
           visible={visible}
         >
           <LeftMenu mode="inline" />
-          <RightMenu mode="inline" />
+          <RightMenu
+            mode="inline"
+            showCartCount={drawCartCount}
+            cart={CartCount}
+          />
         </Drawer>
       </div>
     </nav>
