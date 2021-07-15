@@ -19,11 +19,13 @@ function CartPage(props) {
 
   useEffect(() => {
     let cartItems = [];
+
+    //userData를 불러오고 userdata안 cart도 불러왔을때
     if (userData && userData.cart) {
+      //리덕스 user State 안 cart 상품이 있는경우
       if (userData.cart.length > 0) {
         userData.cart.forEach((item) => {
           cartItems.push(item.id);
-          console.log(item);
         });
         dispatch(getCartItems(cartItems, userData.cart)).then((res) =>
           calculateTotal(res.payload)
@@ -35,7 +37,7 @@ function CartPage(props) {
   let calculateTotal = (cartDetail) => {
     let total = 0;
     if (cartDetail && cartDetail.length > 0) {
-      cartDetail.forEach((item) => {
+      cartDetail.map((item) => {
         total += parseInt(item.price, 10) * item.quantity;
       });
     } else {
