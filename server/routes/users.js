@@ -126,6 +126,7 @@ router.post("/addToCart", auth, (req, res) => {
 router.get("/removeFromCart", auth, (req, res) => {
   //Cart안 상품 지워주기
   User.findOneAndUpdate(
+    //auth 미들웨어 때문에 req.user.id 사용 가능
     { _id: req.user.id },
     { $pull: { cart: { id: req.query.id } } },
     { new: true },
