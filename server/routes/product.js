@@ -39,7 +39,6 @@ router.post("/", (req, res) => {
   //Save DB
   //new로 새로운 product객체 생성
   const product = new Product(req.body);
-  console.log("==================product======================== : ", product);
   product.save((err) => {
     if (err) return res.status(400).json({ success: false, err });
     return res.status(200).json({ success: true });
@@ -53,6 +52,7 @@ router.post("/products", (req, res) => {
   let term = req.body.SearchTerm;
   let findArgs = {};
 
+  //가격 설정 해주는 로직
   for (let key in req.body.newFilters) {
     if (req.body.newFilters[key].length > 0) {
       if (key === "price") {
@@ -70,6 +70,7 @@ router.post("/products", (req, res) => {
 
   console.log("finArgs:", findArgs);
 
+  //검색어 있을때 없을때
   if (term) {
     Product.find(findArgs)
       .find({ $text: { $search: term } })
@@ -108,8 +109,7 @@ router.get("/products_by_id", (req, res) => {
       return item;
     });
   }
-  console.log("==================productIds", productIds);
-  console.log(productIds.length);
+
   if (typeof productIds !== "string") {
     //productId 를 이용해서 DB에서 정보가져옴
     Product.find({ _id: { $in: productIds } })

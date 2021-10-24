@@ -154,7 +154,7 @@ router.post("/successBuy", auth, (req, res) => {
 
   req.body.cartDetail.forEach((item) => {
     history.push({
-      dateOfPurchase: Date.now(),
+      dateOfPurchase: new Date(),
       name: item.title,
       id: item._id,
       price: item.price,
@@ -191,6 +191,8 @@ router.post("/successBuy", auth, (req, res) => {
             quantity: item.quantity,
           });
         });
+
+        //for문으로 돌리기에 코드가 지저분해 질수 있어서 async 사용
         async.eachSeries(
           products,
           (item, callback) => {
@@ -201,6 +203,7 @@ router.post("/successBuy", auth, (req, res) => {
                   sold: item.quantity,
                 },
               },
+              //프론트에 업데이트된 데이터 보내지 않아도 돼서 false
               { new: false },
               callback
             );

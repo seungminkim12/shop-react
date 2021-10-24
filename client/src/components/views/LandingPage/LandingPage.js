@@ -28,7 +28,6 @@ function LandingPage(props) {
       limit: Limit,
     };
 
-    console.log(`Landing Page ${props}`);
     getProducts(body);
   }, []);
 
@@ -37,9 +36,33 @@ function LandingPage(props) {
     axios.post("/api/product/products", body).then((res) => {
       if (res.data.success) {
         if (body.loadMore) {
-          console.log("res.productInfo : ", res.data.productInfo);
-          setProducts([...Products, ...res.data.productInfo]);
+          //필터링해서 더보기 했을때 중복제거 이슈가 있었는데 해결위해 현재State와 res로 데이터 가져온 값을 배열에 담음
+          const allProducts = [...Products, ...res.data.productInfo];
+          const newProducts = [];
+
+          //일단 비교를 위해 현재 state의 갯수X 가져온 res 데이터 수 로 이중 map 돌림
+          Products.map((product) => {
+            res.data.productInfo.map((pro) => {
+              //첫째 product와 res데이터 갯수대로 pro _id 값 비교 && state안에 없는값 && temp 안에 없는 값
+              if (
+                product._id !== pro._id &&
+                !JSON.stringify(Products).includes(pro._id) &&
+                !JSON.stringify(newProducts).includes(pro._id)
+              ) {
+                newProducts.push(pro);
+              }
+            });
+          });
+
+          //새로운 걊이 하나라도 있으면 현재State + temp걊
+          if (newProducts.length > 0) {
+            setProducts([...Products, ...newProducts]);
+          } else {
+            //필터링 없이 더보기 했을때
+            setProducts([...allProducts]);
+          }
         } else {
+          //더보기 없는 값 불러오기
           setProducts(res.data.productInfo);
         }
         setPostSize(res.data.postSize);
@@ -108,10 +131,7 @@ function LandingPage(props) {
   //필터 판별
   const handleFilters = (filters, category) => {
     const newFilters = { ...Filters };
-
     newFilters[category] = filters;
-
-    console.log("newFilters", newFilters);
 
     if (category === "price") {
       let priceValue = handlePrice(filters);
