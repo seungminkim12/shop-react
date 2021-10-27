@@ -1,4 +1,5 @@
-// export const USER_SERVER = "http://54.180.90.171"; //localhost
+//SERVER ROUTES
+export const USER_SERVER = "/api/users";
 
 //////////////////////////// For Header Configs //////////////////////////////////
 const config = {

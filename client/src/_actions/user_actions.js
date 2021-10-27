@@ -9,11 +9,11 @@ import {
   REMOVE_CART_ITEM,
   ON_SUCCESS_BUY,
 } from "./types";
-//import { USER_SERVER } from "../components/Config.js";
+import { USER_SERVER } from "../components/Config.js";
 
 export function registerUser(dataToSubmit) {
   const request = axios
-    .post(`/api/users/register`, dataToSubmit)
+    .post(`${USER_SERVER}/register`, dataToSubmit)
     .then((response) => response.data);
 
   return {
@@ -24,7 +24,7 @@ export function registerUser(dataToSubmit) {
 
 export function loginUser(dataToSubmit) {
   const request = axios
-    .post(`/api/users/login`, dataToSubmit)
+    .post(`${USER_SERVER}/login`, dataToSubmit)
     .then((response) => response.data);
 
   return {
@@ -35,7 +35,7 @@ export function loginUser(dataToSubmit) {
 
 export function auth() {
   const request = axios
-    .get(`/api/users/auth`)
+    .get(`${USER_SERVER}/auth`)
     .then((response) => response.data);
 
   return {
@@ -45,7 +45,9 @@ export function auth() {
 }
 
 export function logoutUser() {
-  const request = axios.get(`/api/users/add`).then((response) => response.data);
+  const request = axios
+    .get(`${USER_SERVER}/add`)
+    .then((response) => response.data);
 
   return {
     type: LOGOUT_USER,
@@ -59,7 +61,7 @@ export function addToCart(id) {
   };
 
   const request = axios
-    .post(`/api/users/addToCart`, body)
+    .post(`${USER_SERVER}/addToCart`, body)
     .then((response) => response.data);
 
   return {
@@ -92,7 +94,7 @@ export function getCartItems(cartItems, userCart) {
 
 export function removeCartItem(productId) {
   const request = axios
-    .get(`/api/users/removeFromCart?id=${productId}`)
+    .get(`${USER_SERVER}/removeFromCart?id=${productId}`)
     .then((response) => {
       //productInfo , cart 정보 조합해서 cartDetail을 만듦
       //item => cart in user, product = > product
@@ -114,9 +116,11 @@ export function removeCartItem(productId) {
 
 export function onSuccessBuy(body) {
   console.log(body);
-  const request = axios.post("/api/users/successBuy", body).then((response) => {
-    return response.data;
-  });
+  const request = axios
+    .post(`${USER_SERVER}/successBuy`, body)
+    .then((response) => {
+      return response.data;
+    });
 
   return {
     type: ON_SUCCESS_BUY,
