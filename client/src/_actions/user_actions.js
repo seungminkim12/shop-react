@@ -116,11 +116,9 @@ export function removeCartItem(productId) {
 
 export function onSuccessBuy(body) {
   console.log(body);
-  const request = axios
-    .post(`${USER_SERVER}/successBuy`, body)
-    .then((response) => {
-      return response.data;
-    });
+  const request = axios.post("/api/users/successBuy", body).then((response) => {
+    return response.data;
+  });
 
   return {
     type: ON_SUCCESS_BUY,
