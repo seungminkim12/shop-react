@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Typography, Button, Form, Input } from "antd";
 import FileUpload from "../../utils/FileUpload";
 import Axios from "axios";
@@ -38,12 +38,7 @@ function UploadProductPage(props) {
 
   const updateImages = (newImages) => {
     setImages(newImages);
-    console.log("afterImages:", images);
   };
-
-  useEffect(() => {
-    console.log("before Images:", images);
-  }, [images]);
 
   const submitHandler = (event) => {
     event.preventDefault();

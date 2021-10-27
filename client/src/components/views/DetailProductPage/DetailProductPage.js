@@ -13,12 +13,10 @@ function DetailProductPage(props) {
     axios
       .get(`/api/product/products_by_id?id=${productId}&type=single`)
       .then((res) => {
-        console.log("this.props", props);
-        console.log(res.data);
         setProduct(res.data);
       })
       .catch((err) => alert(err));
-  }, []);
+  }, [productId]);
 
   return (
     <div style={{ width: "100%", padding: "3rem 4rem" }}>

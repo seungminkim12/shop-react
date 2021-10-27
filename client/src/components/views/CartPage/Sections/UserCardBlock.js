@@ -19,6 +19,8 @@ function UserCardBlock(props) {
             alt="product"
             src={renderCartImage(product.images)}
           />
+          &nbsp;
+          {product.title}
         </td>
         <td>{product.quantity} EA</td>
         <td>$ {product.price}</td>

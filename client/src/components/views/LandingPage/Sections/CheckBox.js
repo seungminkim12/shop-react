@@ -7,16 +7,14 @@ function CheckBox(props) {
   const [Checked, setChecked] = useState([]);
 
   const handleToggle = (value) => {
-    //checked 의 value 가져옴
+    //checked 의 value 가져옴 있으면 index 없으면 -1 return
     const currentIndex = Checked.indexOf(value);
-
     const newChecked = [...Checked];
-
     //없으면 넣는다
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
-      //checked된 state에서 현재 누른 checked가 있다면 빼고
+      //checked state에서 현재 누른 checked가 있다면 빼고
       newChecked.splice(currentIndex, 1);
     }
     setChecked(newChecked);
@@ -31,7 +29,7 @@ function CheckBox(props) {
           onChange={() => handleToggle(value._id)}
           checked={Checked.indexOf(value._id) === -1 ? false : true}
         />
-        <span>{value.name}</span>
+        <span style={{ marginRight: "10px" }}>{value.name}</span>
       </React.Fragment>
     ));
 

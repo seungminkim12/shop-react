@@ -11,6 +11,7 @@ import UploadProductPage from "./views/UploadProductPage/UploadProductPage";
 import DetailProductPage from "./views/DetailProductPage/DetailProductPage";
 import CartPage from "./views/CartPage/CartPage";
 import HistoryPage from "./views/HistoryPage/HistoryPage";
+import DetailHistoryPage from "./views/DetailHistoryPage/DetailHistoryPage";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -28,7 +29,7 @@ function App() {
           <Route
             exact
             path="/product/upload"
-            component={Auth(UploadProductPage, true)}
+            component={Auth(UploadProductPage, true, true)}
           />
           <Route
             exact
@@ -37,6 +38,11 @@ function App() {
           />
           <Route exact path="/user/cart" component={Auth(CartPage, true)} />
           <Route exact path="/history" component={Auth(HistoryPage, true)} />
+          <Route
+            exact
+            path="/history/:historyId"
+            component={Auth(DetailHistoryPage, true)}
+          />
         </Switch>
       </div>
       <Footer />

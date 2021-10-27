@@ -39,6 +39,7 @@ const productSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+//검색옵션 with weight title 5배 description 1
 productSchema.index(
   {
     title: "text",

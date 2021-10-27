@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Menu, Icon, Badge } from "antd";
 import axios from "axios";
 import { USER_SERVER } from "../../../Config";
@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 
 function RightMenu(props) {
   const user = useSelector((state) => state.user);
-  console.log(props);
 
   // useEffect(() => {
   //   if (user.userData && user.userData.cart && user.userData.cart.length > 0) {
@@ -67,24 +66,35 @@ function RightMenu(props) {
 =======
       <>
         <Menu mode={props.mode}>
-          {user.userData && user.userData.isAdmin && (
-            <Menu.Item key="upload">
-              <a href="/product/upload">Upload</a>
+          {/* {user.userData && user.userData.isAdmin && (
+            
+          )} */}
+          <Menu.Item key="upload">
+            <a href="/product/upload">Upload</a>
+          </Menu.Item>
+          <Menu.Item key="history">
+            <a href="/history">History</a>
+          </Menu.Item>
+          {props.mode === "horizontal" && (
+            <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
+              <Badge count={props.cart}>
+                <a
+                  href="/user/cart"
+                  style={{ marginRight: -22, color: "#66777" }}
+                >
+                  <Icon
+                    type="shopping-cart"
+                    style={{ fontSize: 30, marginBottom: 3 }}
+                  />
+                </a>
+              </Badge>
             </Menu.Item>
           )}
-          <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
-            <Badge count={props.cart}>
-              <a
-                href="/user/cart"
-                style={{ marginRight: -22, color: "#66777" }}
-              >
-                <Icon
-                  type="shopping-cart"
-                  style={{ fontSize: 30, marginBottom: 3 }}
-                />
-              </a>
-            </Badge>
-          </Menu.Item>
+          {props.mode === "inline" && (
+            <Menu.Item key="cartH">
+              <a href="/user/cart">Cart</a>
+            </Menu.Item>
+          )}
           <Menu.Item key="logout">
             <a onClick={logoutHandler}>Logout</a>
           </Menu.Item>

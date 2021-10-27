@@ -69,15 +69,14 @@ export function addToCart(id) {
 }
 
 export function getCartItems(cartItems, userCart) {
-  console.log("getCartItems INN");
   const request = axios
+    //products_by_id url 쓰고 쿼리만 array
     .get(`/api/product/products_by_id?id=${cartItems}&type=array`)
     .then((response) => {
       //CartItem에 해당하는 정보를 가져온 후 Quantity 정보 넣어줌
       userCart.forEach((cartItem) => {
         response.data.forEach((productDetail, index) => {
           if (cartItem.id === productDetail._id) {
-            console.log("productDetail:", productDetail);
             response.data[index].quantity = cartItem.quantity;
           }
         });
@@ -93,7 +92,7 @@ export function getCartItems(cartItems, userCart) {
 
 export function removeCartItem(productId) {
   const request = axios
-    .get(`/api/users/removeFromCart?id=${productId}`)
+    .get(`${USER_SERVER}/removeFromCart?id=${productId}`)
     .then((response) => {
       //productInfo , cart 정보 조합해서 cartDetail을 만듦
       //item => cart in user, product = > product
