@@ -17,13 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "async": "^3.2.0",
-<<<<<<< HEAD
-    "aws-sdk": "^2.854.0",
-    "bcrypt": "^3.0.6",
-=======
     "aws-sdk": "^2.923.0",
     "bcrypt": "^5.0.0",
->>>>>>> proxyTest
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",

@@ -9,7 +9,7 @@ import {
   REMOVE_CART_ITEM,
   ON_SUCCESS_BUY,
 } from "./types";
-// import { USER_SERVER } from "../components/Config.js";
+//import { USER_SERVER } from "../components/Config.js";
 
 export function registerUser(dataToSubmit) {
   const request = axios
@@ -92,7 +92,7 @@ export function getCartItems(cartItems, userCart) {
 
 export function removeCartItem(productId) {
   const request = axios
-    .get(`${USER_SERVER}/removeFromCart?id=${productId}`)
+    .get(`/api/users/removeFromCart?id=${productId}`)
     .then((response) => {
       //productInfo , cart 정보 조합해서 cartDetail을 만듦
       //item => cart in user, product = > product

@@ -28,10 +28,6 @@ function LandingPage(props) {
       limit: Limit,
     };
 
-<<<<<<< HEAD
-    console.log("body", body);
-=======
->>>>>>> proxyTest
     getProducts(body);
   }, []);
 
