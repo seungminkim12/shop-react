@@ -110,6 +110,7 @@ router.get("/products_by_id", (req, res) => {
     });
   }
 
+  //type : signle = string, array =
   if (typeof productIds !== "string") {
     //productId 를 이용해서 DB에서 정보가져옴
     Product.find({ _id: { $in: productIds } })

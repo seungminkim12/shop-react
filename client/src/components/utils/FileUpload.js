@@ -68,6 +68,7 @@ function FileUpload(props) {
             <>
               <div onClick={() => deleteHandler(image)} key={index}>
                 <img
+                  alt="image"
                   style={{ minWidth: "300px", width: "300px", height: "240px" }}
                   src={`http://minsshop.cf/${image}`}
                 />

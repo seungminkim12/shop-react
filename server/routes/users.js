@@ -83,6 +83,7 @@ router.post("/addToCart", auth, (req, res) => {
   //미들웨어 auth 때문에 req.user <- 사용 가능
   User.findOne({ _id: req.user._id }, (err, userInfo) => {
     //가져온 정보에서 카트에 넣으려하는 상품이 이미 있는지 확인
+    //하나의 상품만 가져오기 떄문에 플래그 썻음
     let duplicate = false;
     userInfo.cart.forEach((item) => {
       if (item.id === req.body.productId) {
@@ -93,7 +94,10 @@ router.post("/addToCart", auth, (req, res) => {
     if (duplicate) {
       User.findOneAndUpdate(
         //미들웨어 auth 때문에 req.user <- 사용 가능
+        //user model안 카트 컬렉션 구조이기 떄문에 심층적 접근 user->cart->id
         { _id: req.user._id, "cart.id": req.body.productId },
+        //$ -> positional operatior
+        //https://docs.mongodb.com/manual/reference/operator/update/positional/
         { $inc: { "cart.$.quantity": 1 } },
         //update된 userInfo 를 넘겨주기 위해 new: true (commit 느낌)
         { new: true },

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Menu, Icon, Badge } from "antd";
 import axios from "axios";
 import { USER_SERVER } from "../../../Config";
@@ -10,7 +10,6 @@ function RightMenu(props) {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    console.log(props);
     if (user.userData && user.userData.cart && user.userData.cart.length > 0) {
       props.showCartCount(user.userData.cart.length);
     } else {
@@ -50,9 +49,9 @@ function RightMenu(props) {
           <Menu.Item key="upload">
             <a href="/product/upload">Upload</a>
           </Menu.Item>
-          {/* <Menu.Item key="history">
+          <Menu.Item key="history">
             <a href="/history">History</a>
-          </Menu.Item> */}
+          </Menu.Item>
           {props.mode === "horizontal" && (
             <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
               <Badge count={props.cart}>

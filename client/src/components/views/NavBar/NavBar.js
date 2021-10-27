@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
 import { Drawer, Button, Icon } from "antd";
@@ -31,7 +31,11 @@ function NavBar(props) {
     >
       <div className="menu__logo">
         <a href="/">
-          <img src={logo} style={{ width: "30px", height: "30px" }} />
+          <img
+            alt="logo"
+            src={logo}
+            style={{ width: "30px", height: "30px" }}
+          />
         </a>
       </div>
       <div className="menu__container">

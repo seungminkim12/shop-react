@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Typography, Button, Form, Input } from "antd";
 import FileUpload from "../../utils/FileUpload";
 import Axios from "axios";
-import rootReducer from "../../../_reducers/index";
 
 const { Title } = Typography;
 const { TextArea } = Input;
-
-window.store = rootReducer;
 
 const Continents = [
   { key: 1, value: "Africa" },
@@ -42,10 +39,6 @@ function UploadProductPage(props) {
   const updateImages = (newImages) => {
     setImages(newImages);
   };
-
-  /*  useEffect(() => {
-    console.log(`Window Store ${store.getState()}`);
-  }, []); */
 
   const submitHandler = (event) => {
     event.preventDefault();
