@@ -1,7 +1,7 @@
 //SERVER ROUTES
 export const USER_SERVER = "/api/users";
 
-//////////////////////////// For Header Configs //////////////////////////////////
+/* //////////////////////////// For Header Configs //////////////////////////////////
 const config = {
   headers: {
     "Content-type": "application/json",
@@ -19,3 +19,4 @@ if (token && tokenExp) {
 config.headers["Content"] = "application/json;charset=UTF-8";
 
 export const headersConfig = config;
+ */
