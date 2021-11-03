@@ -8,19 +8,17 @@ function HistoryPage(props) {
     if (props.user.userData && props.user.userData.history) {
       setIds([...Ids, ...props.user.userData.history]);
     }
-  }, [props.user]);
+  }, [props.user.userData]);
 
   let newIds = [];
 
-  Ids.map((id) => {
-    props.user.userData.history.map((item) => {
+  Ids.forEach((id) => {
+    props.user.userData.history.forEach((item) => {
       if (!JSON.stringify(newIds).includes(item.paymentId)) {
         newIds.push(item);
       }
     });
   });
-
-  console.log(newIds);
 
   return (
     <>
@@ -41,23 +39,23 @@ function HistoryPage(props) {
           </thead>
           <tbody>
             {props.user.userData &&
-              newIds.map((it, index) => {
+              newIds.map((id, index) => {
                 return (
                   <tr key={index}>
                     <td>
                       <Link
-                        to={`/history/${it.paymentId}`}
+                        to={`/history/${id.paymentId}`}
                         style={{
                           textDecoration: "none",
                           color: "rgba(0, 0, 0, 0.65)",
                         }}
                       >
-                        {it.paymentId}
+                        {id.paymentId}
                       </Link>
                     </td>
-                    <td>{it.price}</td>
-                    <td>{it.quantity}</td>
-                    <td>{it.dateOfPurchase.toString().substring(0, 10)}</td>
+                    <td>{id.price}</td>
+                    <td>{id.quantity}</td>
+                    <td>{id.dateOfPurchase.toString().substring(0, 10)}</td>
                   </tr>
                 );
               })}

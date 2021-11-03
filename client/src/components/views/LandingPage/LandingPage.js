@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Icon, Col, Card, Row, Checkbox, Button } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Icon, Col, Card, Row, Button } from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
 import CheckBox from "./Sections/CheckBox";
@@ -41,8 +40,8 @@ function LandingPage(props) {
           const newProducts = [];
 
           //일단 비교를 위해 현재 state의 갯수X 가져온 res 데이터 수 로 이중 map 돌림
-          Products.map((product) => {
-            res.data.productInfo.map((pro) => {
+          Products.forEach((product) => {
+            res.data.productInfo.forEach((pro) => {
               //첫째 product와 res데이터 갯수대로 pro _id 값 비교 && state안에 없는값 && temp 안에 없는 값
               if (
                 product._id !== pro._id &&

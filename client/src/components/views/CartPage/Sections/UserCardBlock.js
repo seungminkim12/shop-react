@@ -1,11 +1,12 @@
 import React from "react";
 import "./UserCardBlock.css";
+import { Link } from "react-router-dom";
 
 function UserCardBlock(props) {
   const renderCartImage = (images) => {
     if (images.length > 0) {
       let image = images[0];
-      return `http://minsshop.cf/${image}`;
+      return `https://minsshop.cf/${image}`;
     }
   };
 
@@ -14,13 +15,21 @@ function UserCardBlock(props) {
     props.products.map((product, index) => (
       <tr key={index}>
         <td>
-          <img
-            style={{ width: "70px" }}
-            alt="product"
-            src={renderCartImage(product.images)}
-          />
-          &nbsp;
-          {product.title}
+          <Link
+            to={`/product/${product._id}`}
+            style={{
+              textDecoration: "none",
+              color: "rgba(0, 0, 0, 0.65)",
+            }}
+          >
+            <img
+              style={{ width: "70px" }}
+              alt="product"
+              src={renderCartImage(product.images)}
+            />
+            &nbsp;
+            {product.title}
+          </Link>
         </td>
         <td>{product.quantity} EA</td>
         <td>$ {product.price}</td>

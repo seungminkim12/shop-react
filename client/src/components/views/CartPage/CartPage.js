@@ -37,7 +37,7 @@ function CartPage(props) {
   let calculateTotal = (cartDetail) => {
     let total = 0;
     if (cartDetail && cartDetail.length > 0) {
-      cartDetail.map((item) => {
+      cartDetail.forEach((item) => {
         total += parseInt(item.price, 10) * item.quantity;
       });
     } else {

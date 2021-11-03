@@ -20,7 +20,7 @@ function NavBar(props) {
     setVisible(false);
   };
 
-  let drawCartCount = (count) => {
+  const drawCartCount = (count) => {
     setCartCount(count);
   };
 

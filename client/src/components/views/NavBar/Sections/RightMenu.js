@@ -2,20 +2,19 @@
 import React, { useEffect } from "react";
 import { Menu, Icon, Badge } from "antd";
 import axios from "axios";
-import { USER_SERVER } from "../../../Config";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function RightMenu(props) {
   const user = useSelector((state) => state.user);
 
-  // useEffect(() => {
-  //   if (user.userData && user.userData.cart && user.userData.cart.length > 0) {
-  //     props.showCartCount(user.userData.cart.length);
-  //   } else {
-  //     props.showCartCount(0);
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (user.userData && user.userData.cart && user.userData.cart.length > 0) {
+      props.showCartCount(user.userData.cart.length);
+    } else {
+      props.showCartCount(0);
+    }
+  }, [user]);
 
   const logoutHandler = () => {
     axios.get(`/api/users/logout`).then((response) => {

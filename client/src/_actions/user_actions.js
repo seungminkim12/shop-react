@@ -94,7 +94,7 @@ export function getCartItems(cartItems, userCart) {
 
 export function removeCartItem(productId) {
   const request = axios
-    .get(`${USER_SERVER}/removeFromCart?id=${productId}`)
+    .delete(`${USER_SERVER}/removeFromCart?id=${productId}`)
     .then((response) => {
       //productInfo , cart 정보 조합해서 cartDetail을 만듦
       //item => cart in user, product = > product

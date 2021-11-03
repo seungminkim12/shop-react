@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require("cors");
 const router = express.Router();
 const { User } = require("../models/User");
 const { Product } = require("../models/Product");
@@ -128,7 +127,7 @@ router.post("/addToCart", auth, (req, res) => {
   });
 });
 
-router.get("/removeFromCart", auth, (req, res) => {
+router.delete("/removeFromCart", auth, (req, res) => {
   //Cart안 상품 지워주기
   User.findOneAndUpdate(
     //auth 미들웨어 때문에 req.user.id 사용 가능
@@ -152,7 +151,6 @@ router.get("/removeFromCart", auth, (req, res) => {
 });
 
 router.post("/successBuy", auth, (req, res) => {
-  console.log("successBuy INN");
   //User 안 History에 간단한 결제정보
   let history = [];
   let transactionData = {};

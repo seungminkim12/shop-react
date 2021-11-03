@@ -25,8 +25,6 @@ router.post("/image", (req, res) => {
   //가져온 이미지 저장
   upload(req, res, (err) => {
     if (err) return res.json({ success: false, err });
-    console.log("res.req :", res.req);
-    console.log(req.file.path, req.file.filename);
     return res.json({
       success: true,
       filePath: req.file.path,
@@ -68,8 +66,6 @@ router.post("/products", (req, res) => {
     }
   }
 
-  console.log("finArgs:", findArgs);
-
   //검색어 있을때 없을때
   if (term) {
     Product.find(findArgs)
@@ -110,7 +106,7 @@ router.get("/products_by_id", (req, res) => {
     });
   }
 
-  //type : signle = string, array =
+  //type : signle = string, array
   if (typeof productIds !== "string") {
     //productId 를 이용해서 DB에서 정보가져옴
     Product.find({ _id: { $in: productIds } })
