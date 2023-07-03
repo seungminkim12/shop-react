@@ -1,7 +1,5 @@
 Travel-Shop-React
 
-MERN(MongoDB, Express, React, NodeJS) Stack
-
-URL : https://minsshop.cf
+MERN(MongoDB, Express, React, NodeJS) Stac
 
 By SeungminKim
